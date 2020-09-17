@@ -22,5 +22,6 @@ Features :
 8. Material Card Component
 
 Building Steps: 
-Project should be downloaded and built using Android Studio just as a normal Kotlin project.
+Project is built using Android Studio 4.0.1 as Kotlin project.
+
 
