@@ -21,3 +21,6 @@ Features :
 7. Glide Library
 8. Material Card Component
 
+Building Steps: 
+Project should be downloaded and built using Android Studio just as a normal Kotlin project.
+
