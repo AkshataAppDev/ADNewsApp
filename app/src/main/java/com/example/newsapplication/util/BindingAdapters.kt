@@ -12,12 +12,15 @@ import com.example.newsapplication.adapters.NewsAdapter
 import com.example.newsapplication.network.NewsAPIStatus
 import com.example.newsapplication.network.NewsItem
 
+
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<NewsItem>?) {
 
-    //using binding adapter automatically observes live data for news items list
+//    using binding adapter automatically observes live data for news items list
     val adapter = recyclerView.adapter as NewsAdapter
-    adapter.submitList(data)
+    if(data != null) {
+        adapter.submitList(data)
+    }
 }
 
 @BindingAdapter("urlToImage")
@@ -26,6 +29,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     // Use of Glide library for efficiently downloading and displaying images in imageview.
     imgUrl?.let {
         val imageUri = imgUrl.toUri().buildUpon().scheme("https").build()
+
+        //TODO : Use Glide dependency here.
         Glide.with(imgView.context)
             .load(imageUri)
             .apply(
