@@ -5,12 +5,17 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.newsapplication.network.NewsAPIStatus
-import com.example.newsapplication.network.NewsApi
+import com.example.newsapplication.network.NewsApiService
 import com.example.newsapplication.network.NewsItem
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 // Use of ViewModel as per recommended jetpack components.
-class NewsListViewModel : ViewModel() {
+class NewsListViewModel @Inject constructor(private val newsApiServiceDependency: NewsApiService) :
+    ViewModel() {
+
+    private val TAG = "NewsListViewModel"
+
     private val _newsItems = MutableLiveData<List<NewsItem>>()
     val newsItems: LiveData<List<NewsItem>>
         get() = _newsItems
@@ -28,7 +33,7 @@ class NewsListViewModel : ViewModel() {
         viewModelScope.launch {
             try {
                 _status.value = NewsAPIStatus.LOADING
-                val apiResponse = NewsApi.retrofitService.getNewsItems(
+                val apiResponse = newsApiServiceDependency.getNewsItems(
                     "android",
                     "2020-09-15",
                     "2020-08-15",
